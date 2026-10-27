@@ -8,8 +8,14 @@ Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') return new Response('ok', { headers: cors });
   const admin = adminClient();
 
-  const cronSecret = Deno.env.get('CRON_SECRET');
-  if (cronSecret && req.headers.get('x-cron-secret') === cronSecret) {
+  const sent = req.headers.get('x-cron-secret');
+  let cronSecret: string | null = null;
+  if (sent) {
+    // O segredo é gerado no banco (tabela app_config, só a service role lê).
+    const { data } = await admin.from('app_config').select('value').eq('key', 'cron_secret').maybeSingle();
+    cronSecret = data?.value ?? null;
+  }
+  if (cronSecret && sent === cronSecret) {
     const { data: users } = await admin.from('profiles').select('user_id').eq('google_connected', true);
     const report: Record<string, unknown> = {};
     for (const u of users ?? []) {

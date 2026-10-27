@@ -23,7 +23,7 @@ A sincronização roda a cada alteração e uma vez por dia (cron), mantendo sem
 src/                       app (telas em src/screens, componentes em src/components)
 supabase/migrations/       esquema do banco (tabelas + RLS)
 supabase/functions/        google-connect, google-sync, google-disconnect (+ _shared)
-supabase/cron.sql          agendamento diário da sincronização
+
 tests/                     testes do motor (Node) e da sincronização (Deno)
 ```
 
@@ -68,12 +68,17 @@ Faça na ordem. Onde aparecer `<PROJECT_REF>`, use o identificador do seu projet
 ### 4. Supabase — funções de sincronização
 
 ```bash
-# gere um segredo qualquer para o cron, ex.: openssl rand -hex 24
-npx supabase secrets set GOOGLE_CLIENT_ID=... GOOGLE_CLIENT_SECRET=... CRON_SECRET=...
+npx supabase secrets set GOOGLE_CLIENT_ID=... GOOGLE_CLIENT_SECRET=...
 npx supabase functions deploy google-connect google-sync google-disconnect
 ```
 
-Depois, no **SQL Editor**, rode `supabase/cron.sql` trocando `<PROJECT_REF>` e `<CRON_SECRET>`.
+Depois, no **SQL Editor**, informe a URL das funções para o cron diário (a migração já agenda o job e gera o segredo dele):
+
+```sql
+insert into public.app_config (key, value)
+values ('functions_url', 'https://<PROJECT_REF>.supabase.co/functions/v1')
+on conflict (key) do update set value = excluded.value;
+```
 
 ### 5. Vercel — publicar o site
 
