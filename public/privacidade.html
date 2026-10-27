@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Política de Privacidade · Fio a Fio</title>
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<style>
+  :root { --bg:#FFF6F8; --ink:#3A1226; --muted:#8A5A6E; --line:#F3D9E2; --primary:#C42D66; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.6 'DM Sans', system-ui, sans-serif; }
+  main { max-width:720px; margin:0 auto; padding:40px 20px 64px; }
+  h1 { font-size:32px; line-height:1.1; margin:0 0 8px; }
+  h2 { font-size:19px; margin:32px 0 8px; }
+  p, li { color:var(--ink); }
+  .muted { color:var(--muted); font-size:14px; }
+  a { color:var(--primary); }
+  ul { padding-left:20px; }
+  code { background:#fff; border:1px solid var(--line); border-radius:6px; padding:1px 6px; font-size:14px; }
+</style>
+</head>
+<body>
+<main>
+  <a href="/">← Voltar para o Fio a Fio</a>
+  <h1 style="margin-top:24px">Política de Privacidade</h1>
+  <p class="muted">Última atualização: 27 de outubro de 2026</p>
+
+  <p>O <strong>Fio a Fio</strong> é um app para organizar o cronograma capilar e mantê-lo sincronizado com o Google Agenda. Esta política explica quais dados usamos, para quê e como você pode removê-los.</p>
+
+  <h2>Dados que coletamos</h2>
+  <ul>
+    <li><strong>Conta Google:</strong> seu nome, e-mail e identificador, recebidos no login com Google.</li>
+    <li><strong>Seu cronograma:</strong> a configuração do ciclo (dias de day after e lavagens), remarcações, os passos que você marca como feitos, o fuso horário e os nomes de produtos que você escolher informar.</li>
+    <li><strong>Acesso ao Google:</strong> um token de acesso, guardado de forma protegida no servidor, que permite criar e atualizar os itens do cronograma na sua conta.</li>
+  </ul>
+
+  <h2>Como usamos o acesso ao Google</h2>
+  <p>Pedimos apenas dois acessos:</p>
+  <ul>
+    <li><code>calendar.app.created</code> — para criar uma agenda chamada “Fio a Fio” e gerenciar <em>somente</em> os eventos dessa agenda. O app não lê nem altera suas outras agendas ou eventos.</li>
+    <li><code>tasks</code> — para criar uma lista de tarefas “Fio a Fio”, manter as tarefas do cronograma atualizadas e saber quando você conclui uma delas.</li>
+  </ul>
+  <p>Esses dados são usados exclusivamente para oferecer as funções do app. Não vendemos, não compartilhamos com terceiros para publicidade e não usamos para treinar modelos de inteligência artificial.</p>
+  <p>O uso e a transferência de informações recebidas das APIs do Google seguem a <a href="https://developers.google.com/terms/api-services-user-data-policy">Política de Dados do Usuário dos Serviços de API do Google</a>, incluindo os requisitos de Uso Limitado.</p>
+
+  <h2>Onde os dados ficam</h2>
+  <p>Os dados são armazenados no Supabase (banco de dados na região de São Paulo), com acesso restrito: cada pessoa só consegue ler e alterar o próprio cronograma. O site é hospedado na Vercel.</p>
+
+  <h2>Seus direitos e exclusão</h2>
+  <ul>
+    <li>Em <strong>Ajustes → Desconectar</strong> você revoga o acesso ao Google e pode apagar os itens futuros criados na sua agenda.</li>
+    <li>Você também pode revogar o acesso a qualquer momento em <a href="https://myaccount.google.com/permissions">myaccount.google.com/permissions</a>.</li>
+    <li>Para apagar sua conta e todos os dados do cronograma, escreva para o e-mail abaixo. Atendemos em até 30 dias, conforme a LGPD.</li>
+  </ul>
+
+  <h2>Contato</h2>
+  <p>Dúvidas ou pedidos sobre seus dados: <a href="mailto:enricksantos03@gmail.com">enricksantos03@gmail.com</a></p>
+</main>
+</body>
+</html>
