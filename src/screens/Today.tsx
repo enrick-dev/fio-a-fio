@@ -5,6 +5,7 @@ import { useStore } from '../lib/store';
 import { Rise, Ring, Toast, TypeBadge, tagOf } from '../components/ui';
 import { Icon } from '../components/Icon';
 import { SyncChip } from '../components/SyncChip';
+import { InstallCard } from '../components/InstallCard';
 import { RescheduleSheet } from '../components/RescheduleSheet';
 import { TYPE_COLORS, spring } from '../lib/theme';
 import { WD_SHORT, cap, longDate, parts, plural } from '../lib/format';
@@ -119,6 +120,8 @@ export function Today({ go }: { go: (t: Tab) => void }) {
           )}
         </Rise>
       )}
+
+      <InstallCard compact />
 
       <Rise delay={0.24} as="section" style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
         <div className="between">

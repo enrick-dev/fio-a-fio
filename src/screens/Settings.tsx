@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useStore } from '../lib/store';
 import { Rise, Sheet, Switch } from '../components/ui';
 import { Icon } from '../components/Icon';
+import { InstallCard } from '../components/InstallCard';
 import { TYPE_COLORS, spring } from '../lib/theme';
 import { APP_NAME } from '../config';
 import type { Products } from '@shared/schedule.ts';
@@ -80,6 +81,8 @@ export function Settings() {
           )}
         </AnimatePresence>
       </Rise>
+
+      <InstallCard />
 
       <Rise delay={0.12} as="section" style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
         <h2 className="h2">Sincronização</h2>
