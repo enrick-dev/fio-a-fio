@@ -161,9 +161,27 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     } else {
       setSync('ok');
       setSyncError(null);
+      // Tarefas concluídas direto no Google voltam como "feito" aqui.
+      const { data: l } = await supabase.from('day_logs').select('*').gte('date', addMonths(-3));
+      if (l) setLogs(new Map(l.map((x: any) => [x.date, { date: x.date, steps: x.steps ?? {}, done: x.done }])));
     }
     loadProfile();
   }, [loadProfile]);
+
+  // Sincroniza sozinho ao abrir o app (e ao voltar para ele), sem precisar de botão.
+  const autoSynced = useRef(0);
+  useEffect(() => {
+    if (loading || !profile?.google_connected || versions.length === 0) return;
+    const maybeSync = () => {
+      if (document.visibilityState !== 'visible') return;
+      if (Date.now() - autoSynced.current < 5 * 60 * 1000) return; // no máximo a cada 5 min
+      autoSynced.current = Date.now();
+      runSync();
+    };
+    maybeSync();
+    document.addEventListener('visibilitychange', maybeSync);
+    return () => document.removeEventListener('visibilitychange', maybeSync);
+  }, [loading, profile?.google_connected, versions.length, runSync]);
 
   const scheduleSync = useCallback(() => {
     window.clearTimeout(syncTimer.current);
