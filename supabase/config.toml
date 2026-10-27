@@ -1,0 +1,11 @@
+# Configuração para a Supabase CLI (supabase link / db push / functions deploy)
+project_id = "cronograma-capilar"
+
+[functions.google-sync]
+verify_jwt = false # valida o JWT dentro da função (também aceita o segredo do cron)
+
+[functions.google-connect]
+verify_jwt = true
+
+[functions.google-disconnect]
+verify_jwt = true

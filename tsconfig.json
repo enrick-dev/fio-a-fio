@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "lib": ["ES2021", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "noUnusedLocals": true,
+    "baseUrl": ".",
+    "paths": { "@shared/*": ["supabase/functions/_shared/*"] },
+    "types": ["vite/client"]
+  },
+  "include": ["src", "supabase/functions/_shared/schedule.ts"]
+}
