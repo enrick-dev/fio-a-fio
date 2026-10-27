@@ -72,7 +72,7 @@ export function Settings() {
           ) : (
             <motion.div key="off" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               <p style={{ margin: 0, fontSize: 14, lineHeight: 1.45, color: 'var(--blush)' }}>
-                Cada dia do cronograma vira uma tarefa ou evento na sua agenda. Ao marcar como feito aqui, ele é concluído lá também.
+                Cada lavagem do cronograma vira uma tarefa ou evento na sua agenda (os dias de day after ficam de fora). Ao marcar como feito aqui, ele é concluído lá também.
               </p>
               {syncError && <p role="alert" style={{ margin: 0, fontSize: 13, color: '#FFD3DC' }}>{syncError}</p>}
               <button className="btn light block" onClick={signIn}>Conectar conta Google <Icon name="arrow" size={18} /></button>
@@ -109,10 +109,6 @@ export function Settings() {
             <input type="time" className="field" value={profile.reminder_time} disabled={profile.sync_mode === 'tasks'}
               onChange={(e) => e.target.value && updateProfile({ reminder_time: e.target.value })} />
           </label>
-          <div className="list-row">
-            <span style={{ display: 'flex', flexDirection: 'column', gap: 2, fontSize: 15, fontWeight: 500 }}>Incluir dias de day after<span className="sub">Mostra também os dias sem lavar</span></span>
-            <Switch checked={profile.include_da} onChange={(v) => updateProfile({ include_da: v })} label="Incluir dias de day after" />
-          </div>
           <div className="list-row">
             <span style={{ display: 'flex', flexDirection: 'column', gap: 2, fontSize: 15, fontWeight: 500 }}>Avisar na véspera<span className="sub">Lembrete às 20h do dia anterior (eventos)</span></span>
             <Switch checked={profile.notify_eve} onChange={(v) => updateProfile({ notify_eve: v })} label="Avisar na véspera" />

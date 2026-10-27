@@ -129,11 +129,17 @@ Deno.test('cria só as lavagens, é idempotente e acompanha remarcações', asyn
   assertEquals(nut.notes.includes('Máscara X'), true);
 });
 
-Deno.test('incluir day after cria um item por dia', async () => {
-  const tables = setup(true);
+Deno.test('day after nunca vira tarefa, e tarefas antigas de day after são apagadas', async () => {
+  const tables = setup(true); // mesmo com a opção antiga ligada
   const db = fakeDb(tables);
   const g = fakeGoogle();
+  // item de day after criado por uma versão anterior do app
+  g.tasks.set('old', { id: 'old', title: 'Day after 1 de 2', status: 'needsAction' });
+  tables.synced_items.push({ user_id: 'u', date: today, kind: 'task', google_id: 'old', container_id: 'list1', hash: 'x' });
+
   await syncUser(db, 'u');
-  assertEquals(tables.synced_items.length, 61);
-  assertEquals(g.tasks.size, 61);
+  assertEquals(tables.synced_items.length, 20);
+  assertEquals(g.tasks.size, 20);
+  assertEquals(g.tasks.has('old'), false);
+  assertEquals([...g.tasks.values()].some((t) => t.title.startsWith('Day after')), false);
 });

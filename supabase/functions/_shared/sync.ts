@@ -133,14 +133,14 @@ export async function syncUser(admin: SupabaseClient, userId: string): Promise<S
   const desired = new Map<string, Desired>();
   for (const info of schedule.range(start, PAST_DAYS + FUTURE_DAYS + 1)) {
     const wash = isWash(info.type);
-    if (!wash && !profile.include_da) continue;
+    if (!wash) continue; // day after (e dias de espera) não têm ação: não viram tarefa/evento
     const steps = daySteps(info, products);
     const done = logs.get(info.date)?.done === true || (wash && info.date < today);
     desired.set(info.date, {
       date: info.date,
       info,
       done,
-      title: (wash ? '' : '· ') + dayTitle(info),
+      title: dayTitle(info),
       notes:
         steps.map((s, i) => `${i + 1}. ${s.label} — ${s.sub}`).join('\n') +
         (info.pos >= 0 ? `\n\nDia ${info.pos + 1} de ${info.cycleLength} do ciclo · ${APP_NAME}` : `\n\n${APP_NAME}`),

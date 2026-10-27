@@ -4,13 +4,13 @@ App web mobile para organizar o cronograma capilar (day after, lavagem, hidrata�
 
 - **Front-end:** React + Vite + Framer Motion, hospedado na **Vercel**.
 - **Back-end:** **Supabase** (login com Google, banco Postgres com RLS e Edge Functions).
-- **Google:** cada dia vira uma **tarefa** (Google Tasks, aparece no Calendar) ou um **evento** numa agenda própria “Fio a Fio” — você escolhe em Ajustes.
+- **Google:** cada lavagem vira uma **tarefa** (Google Tasks, aparece no Calendar) ou um **evento** numa agenda própria “Fio a Fio” — você escolhe em Ajustes.
 
 ## Como funciona
 
 | Ação no app | O que acontece |
 |---|---|
-| Montar o ciclo | Dias de day after + sequência de lavagens (S/C, H, N, R, detox opcional). |
+| Montar o ciclo | Dias de day after + sequência de lavagens (S/C, H, N, R, detox opcional). Só as lavagens vão para o Google: day after é dia sem ação. |
 | Salvar um ciclo novo | Pergunta em que dia do ciclo você está **hoje** e vale **de hoje em diante**. O histórico fica como estava. |
 | “Não fiz hoje” / “Não fiz neste dia” | Escolhe quando fez (dia seguinte, +2, +3 ou qualquer data). Os dias entre viram *day after extra* e tudo dali pra frente anda junto. Dá pra desfazer. |
 | Marcar o ritual como feito | Conclui a tarefa no Google. Concluir a tarefa no Google também marca como feito no app. |

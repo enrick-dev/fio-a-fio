@@ -10,7 +10,6 @@ export interface Profile {
   timezone: string;
   sync_mode: 'tasks' | 'events';
   reminder_time: string;
-  include_da: boolean;
   notify_eve: boolean;
   products: Products;
   google_connected: boolean;
@@ -259,7 +258,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       if (!profile) return;
       setProfile({ ...profile, ...patch });
       await supabase.from('profiles').update(patch).eq('user_id', profile.user_id);
-      const syncKeys: (keyof Profile)[] = ['sync_mode', 'reminder_time', 'include_da', 'notify_eve', 'products'];
+      const syncKeys: (keyof Profile)[] = ['sync_mode', 'reminder_time', 'notify_eve', 'products'];
       if (profile.google_connected && Object.keys(patch).some((k) => syncKeys.includes(k as keyof Profile))) scheduleSync();
     },
     [profile, scheduleSync],
